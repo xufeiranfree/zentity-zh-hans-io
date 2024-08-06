@@ -3,15 +3,15 @@ import { defineUserConfig } from 'vuepress/cli'
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
-  lang: 'en-US',
+  lang: 'zh-CN',
 
-  title: 'VuePress',
-  description: 'My first VuePress Site',
+  title: 'zentity',
+  description: 'Elasticsearch 实体解析',
 
   theme: defaultTheme({
-    logo: 'https://vuejs.press/images/hero.png',
+    logo: 'https://zentity.io/img/zentity-logo-xl.png',
 
-    navbar: ['/', '/get-started'],
+    navbar: ['/'],
   }),
 
   bundler: viteBundler(),
