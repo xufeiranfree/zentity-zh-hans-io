@@ -4,7 +4,7 @@ title: Home
 heroImage: https://zentity.io/img/zentity-logo-xl.png
 actions:
   - text: 文档
-    link: /文档.html
+    link: /docs/index.html
     type: primary
 
   - text: 版本
@@ -18,8 +18,8 @@ actions:
   - text: Github
     link: https://github.com/zentity-io/zentity
     type: secondary
-
-footer: Licensed under the Apache License, Version 2.0. | Elasticsearch is a trademark of Elasticsearch BV.
+footerHtml: true
+footer: <div class="footer">&copy; 2024 - Now XU Feiran. <br />Translated from <a href="https://github.com/davemoore-" target="_blank">Dave Moore</a>'s <a href="https://www.zentity.io" target="_blank"zentity.io<a>zentity.io</a><br />Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a><br />Elasticsearch is a trademark of Elasticsearch BV.</div>
 ---
 
 # 禅式实体解析
