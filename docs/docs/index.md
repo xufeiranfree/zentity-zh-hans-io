@@ -7,11 +7,11 @@ next:
 # 文档
 
 ## 开始
-- [安装](/docs/installation.html)
+- [安装](./installation.html)
 
 ## 教程
-- [基本用法](/docs/basic-usage/index.html)
-    - [精确名称匹配](/docs/basic-usage/exact-name-matching/index.html)
+- [基本用法](./basic-usage/index.html)
+    - [精确名称匹配](./basic-usage/exact-name-matching/index.html)
     - Robust Name Matching
     - Multiple Attribute Resolution
     - Multiple Resolver Resolution
