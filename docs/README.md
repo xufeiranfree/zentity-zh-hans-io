@@ -61,4 +61,4 @@ zentity 是用于实时实体解析的 [Elasticsearch](https://www.elastic.co/el
 详情请阅读[安装](/安装.html)文档。
 
 # 下一步
-阅读[文档](/文档.html)，了解[实体模型](实体模型.html)、如何[管理实体模型](/管理实体模型.html)以及如何[解析实体](/解析实体.html)。
+阅读[文档](/docs/index.html)，了解[实体模型](实体模型.html)、如何[管理实体模型](/管理实体模型.html)以及如何[解析实体](/解析实体.html)。

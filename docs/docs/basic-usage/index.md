@@ -1,4 +1,5 @@
 ---
+title: 基础用法教程
 pre:
   text: 安装
   link: /docs/installation.html
@@ -52,28 +53,29 @@ next:
 本系列的每个教程都会提供样本数据，供您练习使用。
 
 ## 步骤 2. 定义实体模型
-Entity models are the most important constructs you need to learn about. zentity uses entity models to construct queries, match attributes across disparate indices, and resolve entities.
+[实体模型](https://zentity.io/docs/entity-models)是您需要了解的最重要的结构。`zentity`使用实体模型来构建查询、匹配不同索引中的属性以及解析实体。
 
-An entity model defines the logic for resolving an entity type such as a person or organization. It defines the attributes of the entity ("attributes"), the logic to match each attribute ("matchers"), the logic to resolve documents to an entity based on the matching attributes ("resolvers"), and the associations between attributes and matchers with index fields ("indices"). This is the step that demands the most thinking. You need to think about what attributes constitute an entity type, what logic goes into matching each attribute, which attributes and matchers map to which fields of which indices, and what combinations of matched attributes lead to resolution.
+实体模型定义了解析某种实体类型（如个人或组织）的逻辑，它定义了实体的属性（“`attributes`”）、每个属性的匹配逻辑（“`matchers`”）、基于匹配的属性将文档解析到实体的解析逻辑（“`resolvers`”）以及属性和匹配器与索引字段之间的关联（“`indices`”）。这一步需要大量思考，需要考虑哪些属性构成一个实体类型，每个属性的匹配逻辑是什么，哪些属性和匹配器映射到哪些索引字段，以及哪些匹配属性的组合会导致解析。
 
-Luckily, all this thinking will pay off quickly, because entity models have two great features:
+幸运的是，所有这些思考很快就会得到回报，因为实体模型有两个很棒的特性：
 
-**Reusability**
+**可重用性**
 
-Once you have an entity model you can use it everywhere. As you index new data sets with fields that map to familiar attributes, you can include them in your entity resolution jobs. If you index data with new attributes that aren't already in your model, you can simply update your model to support them.
+一旦您有了一个实体模型，就可以在任何地方使用它。当您为新的数据集建立索引，如果这些数据集的字段映射到了熟悉的属性，您就可以对它们实施实体解析。如果您为具有新属性的数据建立索引，而这些属性在您的模型中尚未包含，您只需更新您的模型以支持它们。
 
-**Flexibility**
+**灵活性**
 
-You don't need to change your data to use an entity model. An entity model only controls the execution of queries. So there's no risk in updating or experimenting with an entity model.
+您无需更改数据即可使用实体模型。实体模型仅控制查询的执行。因此，更新或试验实体模型没有风险。
 
 ## 步骤 3. 解析实体
-So you have some data and an entity model. Now you can resolve entities!
 
-Once you have an entity model, you can use the **Resolution API** to run an entity resolution job using some input.
+所以您有了一些数据和一个实体模型，现在您可以解析实体了！
 
-**Example**
+一旦有了[实体模型](https://zentity.io/docs/entity-models)，您就可以使用[**Resolution API**](https://zentity.io/docs/rest-apis/resolution-api)，通过一些输入来实行实体解析任务。
 
-Run an entity resolution job using an indexed entity model called person.
+**样例**
+
+使用一个名为 `person` 的、已索引的实体模型，运行实体解析任务。
 ``` json
 POST _zentity/resolution/person?pretty
 {
@@ -84,7 +86,8 @@ POST _zentity/resolution/person?pretty
   }
 }
 ```
-Run an entity resolution job using an embeded entity model. This example uses three attributes, two resolvers, and two indices.
+
+使用一个嵌入的实体模型运行实体解析任务，示例使用了三个属性、两个解析器和两个索引。
 ``` json
 POST _zentity/resolution?pretty
 {
@@ -187,4 +190,4 @@ POST _zentity/resolution?pretty
   }
 }
 ```
-Now that you have a sense of what to expect, let's walk through some guided tutorials to help you master the basic functions of zentity.
+现在，您已经了解了预期内容，让我们通过一些引导式教程来帮助您掌握 zentity 的基本功能。
