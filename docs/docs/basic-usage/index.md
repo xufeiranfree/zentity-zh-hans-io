@@ -1,5 +1,5 @@
 ---
-title: 基础用法教程
+title: 基础用法
 pre:
   text: 安装
   link: /docs/installation.html
