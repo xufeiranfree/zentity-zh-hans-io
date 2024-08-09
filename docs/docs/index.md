@@ -11,8 +11,8 @@ next:
 
 ## 教程
 - [基本用法](./basic-usage/index.html)
-    - [精确名称匹配](./basic-usage/exact-name-matching/index.html)
-    - Robust Name Matching
+    - [精确的名称匹配](./basic-usage/exact-name-matching/index.html)
+    - 强大的名称匹配
     - Multiple Attribute Resolution
     - Multiple Resolver Resolution
     - Cross Index Resolution

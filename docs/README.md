@@ -19,7 +19,7 @@ actions:
     link: https://github.com/zentity-io/zentity
     type: secondary
 footerHtml: true
-footer: <div class="footer">&copy; 2024 - Now XU Feiran. <br />Translated from <a href="https://github.com/davemoore-" target="_blank">Dave Moore</a>'s <a href="https://www.zentity.io" target="_blank"zentity.io<a>zentity.io</a><br />Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a><br />Elasticsearch is a trademark of Elasticsearch BV.</div>
+footer: <div class="footer">Translated from <a href="https://github.com/davemoore-" target="_blank">Dave Moore</a>'s <a href="https://www.zentity.io" target="_blank"zentity.io<a>zentity.io</a>, unofficial version.<br />Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a></div>
 ---
 
 # 禅式实体解析

@@ -1,53 +1,53 @@
 ---
-title: 精确名称匹配
+title: 精确的名称匹配
 pre:
   text: 基础用法
   link: /docs/basic-usage/index.html
-# next:
-#   text: 精确名称匹配
-#   link: /docs/basic-usage/index.html
+next:
+  text: 强大的名称匹配
+  link: /docs/basic-usage/robust-name-matching/index.html
 ---
 
 ### 基础用法教程 📖
 本教程是帮助您学习和执行 zentity 基本功能的系列教程之一。每篇教程都会在之前教程的基础上增加一些复杂功能，因此您可以从简单的功能开始，逐步学习更高级的功能。
-1. **精确名称匹配** ← _你在这里_
-2. Robust Name Matching
+1. **精确的名称匹配** ← _你在这里_
+2. 强大的名称匹配
 3. Multiple Attribute Resolution
 4. Multiple Resolver Resolution
 5. Cross Index Resolution
 6. Scoping Resolution
 
-# 精确名称匹配
+# 精确的名称匹配
 欢迎来到实体解析的“Hello world!”
 
-This tutorial will guide you through one the simplest forms of entity resolution – exact name matching. You will learn how to create an entity model and how to resolve an entity using a single attribute mapped to a single field of a single index. This is meant to introduce you to the most basic functions of entity resolution with zentity.
+本教程将指导您了解实体解析的一种最简单形式——精确的名称匹配。您将学习如何创建实体模型，以及如何使用映射到**单索引——单字段**的**单个 attribute** 来解析实体。本教程旨在向您介绍使用 zentity 进行实体解析的最基本功能。
 
-Let's dive in.
+让我们一探究竟。
 
-> **Before you start**
+> **开始之前**
 > 
-> You must install Elasticsearch, Kibana, and zentity to complete this tutorial. This tutorial was tested with zentity-1.6.1-elasticsearch-7.10.1.
+> 您必须安装 [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)、[Kibana](https://www.elastic.co/downloads/kibana) 和 [zentity](https://zentity.io/docs/installation) 才能完成本教程。本教程使用 [zentity-1.6.1-elasticsearch-7.10.1](https://zentity.io/releases#zentity-1.6.1) 进行测试。
 > 
-> **Quick start**
+> **快速上手**
 > 
-> You can use the zentity sandbox which has the required software and data for these tutorials. This will let you skip many of the setup steps.
+> 您可以使用 [zentity 沙盒](https://zentity.io/sandbox)，其中包含这些教程所需的软件和数据。这样可以跳过许多设置步骤。
 
-## 1. Prepare for the tutorial
-### 1.1 Open the Kibana Console UI
-The Kibana Console UI makes it easy to submit requests to Elasticsearch and read responses.
+## 1. 准备
+### 1.1 打开 Kibana Console 界面
+通过 [Kibana Console 界面](https://www.elastic.co/guide/en/kibana/current/console-kibana.html)，可以轻松向 Elasticsearch 提交请求并读取响应。
 
-### 1.2 Delete any old tutorial indices
-> **Note:** Skip this step if you're using the zentity sandbox.
+### 1.2 删除所有旧教程使用的索引
+> **注意：** 如果您使用的是 [zentity 沙盒](https://zentity.io/sandbox)，请跳过这一步。
 
-Let's start from scratch. Delete any tutorial indices you might have created from other tutorials.
+让我们从头开始，删除所有从其他教程中创建的索引。
 ``` json
 DELETE zentity_tutorial_1_*
 ```
 
-### 1.3 Create the tutorial index
-> **Note:** Skip this step if you're using the zentity sandbox.
+### 1.3 创建教程索引
+> **注意：** 如果您使用的是 [zentity 沙盒](https://zentity.io/sandbox)，请跳过这一步。
 
-Now create the index for this tutorial.
+现在为本教程创建索引。
 ``` json
 PUT zentity_tutorial_1_exact_name_matching
 {
@@ -88,10 +88,10 @@ PUT zentity_tutorial_1_exact_name_matching
 }
 ```
 
-### 1.4 Load the tutorial data
-> **Note:** Skip this step if you're using the zentity sandbox.
+### 1.4 加载教程数据
+> **注意：** 如果您使用的是 [zentity 沙盒](https://zentity.io/sandbox)，请跳过这一步。
 
-Add the tutorial data to the index.
+将教程数据添加到索引中。
 ``` json
 POST _bulk?refresh
 {"index": {"_id": "1", "_index": "zentity_tutorial_1_exact_name_matching"}}
@@ -124,7 +124,7 @@ POST _bulk?refresh
 {"city": "Arlington", "email": "elise.jonas@corp.example.net", "first_name": "Elise", "id": "14", "last_name": "Jonas", "phone": "703-555-5555", "state": "VA", "street": "1 Corporate Way"}
 ```
 
-Here's what the tutorial data looks like.
+下面是教程数据的样子。
 | id  | first_name | last_name       | street            | city        | state | phone            | email                             |
 |-----|------------|-----------------|-------------------|-------------|-------|------------------|-----------------------------------|
 | 1   | Allie      | Jones           | 123 Main St       | Washington  | DC    | 202-555-1234     | allie@example.net                 |
@@ -142,10 +142,12 @@ Here's what the tutorial data looks like.
 | 13  | Allison    | Jones Smith     | 1 Corporate Way   | Arlington   | VA    | 703-555-5555     | allison.j.smith@corp.example.net  |
 | 14  | Elise      | Jonas           | 1 Corporate Way   | Arlington   | VA    | 703-555-5555     | elise.jonas@corp.example.net      |
 
-## 2. Create the entity model
-> **Note:** Skip this step if you're using the zentity sandbox.
-Let's use the Models API to create the entity model below. We'll review each part of the model in depth.
-**Request**
+## 2. 创建实体模型
+> **注意：** 如果您使用的是 [zentity 沙盒](https://zentity.io/sandbox)，请跳过这一步。
+
+让我们使用[模型 API](https://zentity.io/docs/rest-apis/models-api)创建下面的实体模型，我们将深入查看模型的每个部分。
+
+**请求**
 ``` json
 PUT _zentity/models/zentity_tutorial_1_person
 {
@@ -187,7 +189,8 @@ PUT _zentity/models/zentity_tutorial_1_person
   }
 }
 ```
-**Response**
+
+**响应**
 ``` json
 {
   "_index" : ".zentity-models",
@@ -203,8 +206,10 @@ PUT _zentity/models/zentity_tutorial_1_person
   "_primary_term" : 1
 }
 ```
-### 2.1 Review the attributes
-We defined two attributes called "first_name" and "last_name" as shown in this section:
+
+### 2.1 查看属性
+如本节所示，我们定义了名为`first_name`和`last_name`的两个属性：
+
 ``` json
 {
   "attributes": {
@@ -217,7 +222,8 @@ We defined two attributes called "first_name" and "last_name" as shown in this s
   }
 }
 ```
-The default type of any attribute is "string". You can exclude "type" to simplify the entity model like this:
+
+任何属性的默认类型都是`字符串`，您可以像这样忽略`类型`，以简化实体模型：
 ``` json
 {
   "attributes": {
@@ -226,8 +232,10 @@ The default type of any attribute is "string". You can exclude "type" to simplif
   }
 }
 ```
-### 2.2 Review the resolvers
-We defined a single resolver called "name_only" as shown in this section:
+
+### 2.2 查看解析器
+如本节所示，我们定义了一个名为`name_only`的解析器：
+
 ``` json
 {
   "resolvers": {
@@ -237,14 +245,16 @@ We defined a single resolver called "name_only" as shown in this section:
   }
 }
 ```
-This resolver requires only the "first_name" and "last_name" attributes to resolve an entity. So if you try to resolve a person named "Alice," then every document with the name "Alice" will be grouped with her. Obviously this would raise many false positives in the real world. We're doing this as a gentle introduction to the concept of entity resolution.
 
-> Tip
+该解析器只需要`first_name`和`last_name`属性即可解析实体。因此，如果您尝试解析一个名为“Alice”的人，那么所有名称为“Alice”的文档都将与她归为一组。显然，这在现实世界中会产生很多误报。我们这样做是为了简单地介绍实体解析的概念。
+
+> 提示
 > 
-> Most resolvers should use multiple attributes to resolve an entity to minimize false positives. Many people share the same name, but few people share the same name and address. Consider all the combinations of attributes that could resolve an entity with confidence, and then create a resolver for each combination. Other tutorials explore how to use resolvers with multiple attributes.
+> 大多数解析器应使用多个属性来解析一个实体，以尽量减少误报。可能有很多人重名，但很少有人名字和地址都一样。考虑所有能够可靠解析实体的属性组合，然后为每种组合创建一个解析器。[其他教程](https://zentity.io/docs/basic-usage)将探讨如何使用具有多个属性的解析器。
 
-### 2.3 Review the matchers
-We defined a single matcher called "simple" as shown in this section:
+### 2.3 查看匹配器
+如本节所示，我们定义了一个名为`simple`的匹配器：
+
 ```json
 {
   "matchers": {
@@ -258,7 +268,9 @@ We defined a single matcher called "simple" as shown in this section:
   }
 }
 ```
-This matcher uses a simple match clause:
+
+该匹配器使用一个简单的[匹配](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)子句：
+
 ``` json
 {
   "match": {
@@ -266,9 +278,13 @@ This matcher uses a simple match clause:
   }
 }
 ```
-The "{{ field }}" and "{{ value }}" strings are special variables. Every matcher should have these variables defined somewhere in the "clause" field. zentity will replace the "{{ field }}" variable with the name of an index field and the "{{ value }}" variable with the value of an attribute.
-### 2.4 Review the indices
-We defined a single index as shown in this section:
+
+'{{ field }}' 和 '{{ value }}' 字符串是特殊变量，zentity 会用索引字段的名称替换'{{ field }}'变量，用属性值替换'{{ value }}'变量。
+
+### 2.4 查看索引
+
+如本节所示，我们定义了一个索引：
+
 ``` json
 {
   "indices": {
@@ -287,11 +303,12 @@ We defined a single index as shown in this section:
   }
 }
 ```
-## 3. Resolve an entity
-### 3.1 Run a basic resolution job
-Let's use the Resolution API to resolve a person with a known first name and last name.
 
-**Request**
+## 3. 查看实体
+### 3.1 运行一个基础的解析任务
+让我们使用[解析 API](https://zentity.io/docs/rest-apis/resolution-api) 来解析一个已知名字和姓氏的人。
+
+**请求**
 ``` json
 POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=false
 {
@@ -301,7 +318,8 @@ POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=false
   }
 }
 ```
-Response
+
+**响应**
 ``` json
 {
   "took" : 3,
@@ -329,14 +347,15 @@ Response
   }
 }
 ```
-As expected, we retrieved two documents each with a first name that exactly matches "Allie" and a last name that exactly matches "Jones." Both documents came from the same index at the same query of the same hop, as shown in the "_index", "_hop", and "_query" fields. All other documents, including those that were similar to these, were excluded from the results because we required exact matches on those two fields.
 
-### 3.2 Show the "_source"
-We can include the original values of each document as they exist in Elasticsearch.
+正如预期的那样，我们检索到两份文档，其名字精确匹配“Allie”，姓氏精确匹配“Jones”。如'_index'、'_hop'和'_query'字段所示，这两个文档都来自同一跳转的同一查询的同一索引。由于我们要求这两个字段精确匹配，因此所有其他文档，包括与这些文档相似的文档，都被排除在结果之外。
 
-Let's run the job again, and now let's include the "_source" field of each document. The "_source" field is the original JSON document that's stored in an Elasticsearch index.
+### 3.2 展示`_source`
+我们可以获取 Elasticsearch 中文档的原始值。
 
-**Request**
+让我们再次运行任务，将每个文档的 [_source](https://zentity.io/docs/entity-resolution/output-specification/#hits.hits._source) 字段也包含进来，其中 [_source](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html) 字段是存储在 Elasticsearch 索引中的原始 JSON 文档。
+
+**请求**
 ``` json
 POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true
 {
@@ -347,7 +366,7 @@ POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true
 }
 ```
 
-**Response**
+**响应**
 ``` json
 {
   "took" : 4,
@@ -395,14 +414,15 @@ POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true
   }
 }
 ```
-Now, in addition to the values mapped to our normalized "_attributes", we can see the values of those attributes and the values of every other field as they exist in the "_source" of the documents.
 
-### 3.3 Show the "_explanation"
-We can learn how the documents matched, too.
+现在，除了映射到规范化的`_attributes`的值之外，我们还可以在文档的`_source`中看到每个其他字段的值。
 
-Let's run the job again, and now let's include the "_explanation" field to see exactly why each document matched. The "_explanation" field tells us which resolvers caused a document to match, and more specifically, which input value matched which indexed value using which matcher and any parameters.
+### 3.3 展示`_explanation`
+我们还可以了解文件是如何匹配的。
 
-**Request**
+让我们再次运行任务，现在让我们加入 [_explanation](https://zentity.io/docs/entity-resolution/output-specification/#hits.hits._explanation) 字段，看看每个文档匹配的确切原因。`_explanation`字段告诉我们是哪个解析器导致了文档的匹配，更具体地说，是哪个输入值通过哪个匹配器和参数匹配了哪个索引中的值。
+
+**请求**
 ``` json
 POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true&_explanation=true
 {
@@ -413,7 +433,7 @@ POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true&_explanat
 }
 ```
 
-**Response**
+**响应**
 ``` json
 {
   "took" : 4,
@@ -505,9 +525,10 @@ POST _zentity/resolution/zentity_tutorial_1_person?pretty&_source=true&_explanat
   }
 }
 ```
-Both documents matched because of the "name_only" resolver as shown under "_explanation"."resolvers". Each document had two matching fields as shown under "_explanation"."matches".
 
-Let's look at one of those matches:
+如 `_explanation.resolvers`'中所示，由于使用了`name_only`解析器，两个文档都匹配到了。如 `_explanation.matched`中所示，每个文档都有两个匹配字段。
+
+让我们来看看其中的一个匹配：
 ``` json
 "_explanation": {
   ...
@@ -524,11 +545,12 @@ Let's look at one of those matches:
   ]
 }
 ```
-This tells us that the "first_name" attribute was discovered at an index field called "first_name" which had a value of "Allie" that matched a prior known attribute value of "Allie" using the "simple" matcher that we defined in our entity model. In other words, an exact match was found.
 
-# Conclusion
-Congratulations! You just did one of the simplest forms of entity resolution – exact name matching.
+这告诉我们，`first_name`属性是在一个名为`first_name`的索引字段中发现的，该索引字段的值为`Allie`，通过使用实体模型中定义的`简单`匹配器，该值与之前已知的属性值`Allie`相匹配。换句话说，找到了一个精确匹配的属性。
 
-Not too exciting yet, right? Let's make things a little more interesting.
+# 总结
+恭喜您！你刚刚完成了实体解析中最简单的一种形式——精确的名称匹配。
 
-The next tutorial will show how you can accomplish robust name matching using multiple forms of a name to handle challenges such as typos or phonetic variance. You will resolve an entity using a single attribute matched to multiple fields of a single index, rather than a single field of a single index.
+还不算太激动吧？让我们把事情变得更有趣一些吧。
+
+下一篇教程将介绍如何使用名称的多种形式实现[强大的名称匹配](/docs/basic-usage/robust-name-matching/index.html)，以应对错别字或语音差异等挑战。您将使用匹配到单索引——多字段的**单个attribute**，而不是用**单索引——单字段**来解析实体。
