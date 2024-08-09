@@ -8,7 +8,7 @@ export default defineUserConfig({
     ['meta', { name: 'google-site-verification', content: 'q2k6tX5Cr-G8xLqj8gd6y1d972NEjmmAqC-LTYPdTcs' }],
   ],
   lang: 'zh-CN',
-  title: 'zentity',
+  title: 'zentity 中文文档',
   description: 'Elasticsearch 实体解析',
 
   theme: defaultTheme({
