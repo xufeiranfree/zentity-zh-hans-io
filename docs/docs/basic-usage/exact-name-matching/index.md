@@ -26,7 +26,7 @@ next:
 
 > **开始之前**
 > 
-> 您必须安装 [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)、[Kibana](https://www.elastic.co/downloads/kibana) 和 [zentity](https://zentity.io/docs/installation) 才能完成本教程。本教程使用 [zentity-1.6.1-elasticsearch-7.10.1](https://zentity.io/releases#zentity-1.6.1) 进行测试。
+> 您必须安装 [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)、[Kibana](https://www.elastic.co/downloads/kibana) 和 [zentity](/docs/installation/index.html) 才能完成本教程。本教程使用 [zentity-1.6.1-elasticsearch-7.10.1](https://zentity.io/releases#zentity-1.6.1) 进行测试。
 > 
 > **快速上手**
 > 

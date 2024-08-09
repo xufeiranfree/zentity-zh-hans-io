@@ -2,7 +2,7 @@
 title: 基础用法
 pre:
   text: 安装
-  link: /docs/installation.html
+  link: /docs/installation/index.html
 next:
   text: 精确的名称匹配
   link: /docs/basic-usage/exact-name-matching/index.html
