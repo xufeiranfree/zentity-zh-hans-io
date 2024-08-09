@@ -4,8 +4,10 @@ import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
   base: '/',
+  head: [
+    ['meta', { name: 'google-site-verification', content: 'q2k6tX5Cr-G8xLqj8gd6y1d972NEjmmAqC-LTYPdTcs' }],
+  ],
   lang: 'zh-CN',
-
   title: 'zentity',
   description: 'Elasticsearch 实体解析',
 
