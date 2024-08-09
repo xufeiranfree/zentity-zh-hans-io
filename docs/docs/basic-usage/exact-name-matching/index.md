@@ -11,11 +11,11 @@ next:
 ### 基础用法教程 📖
 本教程是帮助您学习和执行 zentity 基本功能的系列教程之一。每篇教程都会在之前教程的基础上增加一些复杂功能，因此您可以从简单的功能开始，逐步学习更高级的功能。
 1. **精确的名称匹配** ← _你在这里_
-2. 强大的名称匹配
-3. Multiple Attribute Resolution
-4. Multiple Resolver Resolution
-5. Cross Index Resolution
-6. Scoping Resolution
+2. [强大的名称匹配](/docs/basic-usage/robust-name-matching/index.html)
+3. [多属性解析](/docs/basic-usage/multiple-attribute-resolution/index.html)
+4. [多解析器解析](/docs/basic-usage/multiple-resolver-resolution/index.html)
+5. [跨索引解析](/docs/basic-usage/cross-index-resolution/index.html)
+6. [Scoping Resolution](/docs/basic-usage/scoping-resolution/index.html)
 
 # 精确的名称匹配
 欢迎来到实体解析的“Hello world!”
