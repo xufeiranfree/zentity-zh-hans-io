@@ -38,7 +38,7 @@ next:
 ### 1.1 安装所需插件
 > **注意：** 如果您使用的是 [zentity 沙盒](https://zentity.io/sandbox)，请跳过这一步。
 
-本教程使用了 Elasticsearch 的 [phonetic 分析插件[(https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-phonetic.html)和 [ICU 分析插件](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)。在安装前需停止 Elasticsearch，安装插件后再启动服务。
+本教程使用了 Elasticsearch 的 [phonetic 分析插件](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-phonetic.html)和 [ICU 分析插件](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)。在安装前需停止 Elasticsearch，安装插件后再启动服务。
 
 Linux 安装命令： (in the $ES_HOME directory of a .tar.gz installation):
 ``` sh
